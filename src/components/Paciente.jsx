@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom'; // Імплементація useNavigate
 
 const Paciente = ({ paciente = {}, setPaciente, eliminarPaciente }) => {
+  const navigate = useNavigate(); // Використовуйте useNavigate для навігації
+
   console.log(paciente);
 
   if (!paciente || typeof paciente !== 'object') {
@@ -28,6 +31,10 @@ const Paciente = ({ paciente = {}, setPaciente, eliminarPaciente }) => {
     }
   };
 
+  const seeAllAppointments = () => {
+    navigate(`/patients/${id}/appointments`); // Використовуйте navigate
+  };
+
   const renderField = (label, value) => (
     <p className="font-bold mb-3 text-gray-700 uppercase">
       {label}: <span className="font-normal normal-case">{value ?? 'Not specified'}</span>
@@ -36,7 +43,7 @@ const Paciente = ({ paciente = {}, setPaciente, eliminarPaciente }) => {
 
   return (
     <div className="ml-5 mr-1 my-10 bg-white shadow-md px-5 py-5 rounded-xl">
-            {profileImage && (
+      {profileImage && (
         <img 
           src={profileImage} 
           alt={`Profile of ${name || 'patient'}`} 
@@ -75,9 +82,9 @@ const Paciente = ({ paciente = {}, setPaciente, eliminarPaciente }) => {
         <button 
           className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg ml-2 transition duration-300" 
           type="button" 
-          onClick={handleEliminar}
+          onClick={seeAllAppointments}
         >
-          See all appointmentrs
+          See all appointments
         </button>
       </div>
     </div>
